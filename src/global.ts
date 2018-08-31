@@ -1,0 +1,1 @@
+export const LAMBDA_URL = 'https://qzsm779i45.execute-api.us-east-1.amazonaws.com/prod'

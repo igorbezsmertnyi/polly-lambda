@@ -12,5 +12,5 @@ module.exports = {
         args[0].template = 'static/index.html'
         return args 
       })
-  },
+  }
 }
