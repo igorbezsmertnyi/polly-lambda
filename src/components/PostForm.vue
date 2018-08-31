@@ -2,24 +2,16 @@
   <div class="form">
     <el-form :model="form" :rules="rules" ref="postForm">
       <el-row class="form__row">
-        <el-col :span="16">
-          <el-form-item label="Name" prop="name">
-            <el-input placeholder="Type your Name" v-model="form.name"></el-input>
-          </el-form-item>
-        </el-col>
-
-        <el-col :span="7" :offset="1">
-          <el-form-item label="Voice" prop="voice">
-            <el-select v-model="form.voice" placeholder="Select Voice">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
+        <el-form-item label="Voice" prop="voice">
+          <el-select v-model="form.voice" placeholder="Select Voice">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
       </el-row>
 
       <el-row class="form__row">
@@ -50,16 +42,11 @@ export default class Form extends Vue {
 
   options: Array<Voices> = initialVoices
   form: Object = {
-    name: '',
     text: '',
     voice: ''
   }
 
   rules: Object = {
-    name: [
-      { required: true, message: 'Please write your name', trigger: 'blur' },
-      { min: 3, message: 'Minimal length is 3 characters', trigger: 'blur' }
-    ],
     voice: [
       { required: true, message: 'Please select the voice', trigger: 'change' }
     ],
