@@ -3,14 +3,10 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+import { post } from '@/store/post'
+
 export default new Vuex.Store({
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
+  modules: {
+    post
   }
 })

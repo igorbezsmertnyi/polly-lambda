@@ -42,14 +42,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import Axios, { AxiosInstance } from 'axios'
+import { Voices, initialVoices } from '@/models/Voices'
 
 @Component
 export default class Form extends Vue {
-  $refs!: {
-    postForm: any
-  }
+  $refs!: { postForm: any }
 
+  options: Array<Voices> = initialVoices
   form: Object = {
     name: '',
     text: '',
@@ -69,69 +68,12 @@ export default class Form extends Vue {
     ]
   }
 
-  options: Array<any> = [
-    { value: 'Ivy', label: 'Ivy [English - American]' },
-    { value: 'Joanna', label: 'Joanna [English - American]' },
-    { value: 'Joey', label: 'Joey [English - American]' },
-    { value: 'Justin', label: 'Justin [English - American]' },
-    { value: 'Kendra', label: 'Kendra [English - American]' },
-    { value: 'Kimberly', label: 'Kimberly [English - American]' },
-    { value: 'Salli', label: 'Salli [English - American]' },
-    { value: 'Nicole', label: 'Nicole [English - Australian]' },
-    { value: 'Russell', label: 'Russell [English - Australian]' },
-    { value: 'Emma', label: 'Emma [English - British]' },
-    { value: 'Brian', label: 'Brian [English - British]' },
-    { value: 'Amy', label: 'Amy [English - British]' },
-    { value: 'Raveena', label: 'Raveena [English - Indian]' },
-    { value: 'Geraint', label: 'Geraint [English - Welsh]' },
-    { value: 'Ricardo', label: 'Ricardo [Brazilian Portuguese]' },
-    { value: 'Vitoria', label: 'Vitoria [Brazilian Portuguese]' },
-    { value: 'Lotte', label: 'Lotte [Dutch' },
-    { value: 'Ruben', label: 'Ruben [Dutch]' },
-    { value: 'Mathieu', label: 'Mathieu [French]' },
-    { value: 'Celine', label: 'Celine [French]' },
-    { value: 'Chantal', label: 'Chantal [Canadian French]' },
-    { value: 'Marlene', label: 'Marlene [German]' },
-    { value: 'Dora', label: 'Dora [Icelandic]' },
-    { value: 'Karl', label: 'Karl [Icelandic]' },
-    { value: 'Carla', label: 'Carla [Italian]' },
-    { value: 'Giorgio', label: 'Giorgio [Italian]' },
-    { value: 'Mizuki', label: 'Mizuki [Japanese]' },
-    { value: 'Liv', label: 'Liv [Norwegian]' },
-    { value: 'Maja', label: 'Maja [Polish]' },
-    { value: 'Jan', label: 'Jan [Polish]' },
-    { value: 'Ewa', label: 'Ewa [Polish]' },
-    { value: 'Cristiano', label: 'Cristiano [Portuquese]' },
-    { value: 'Ines', label: 'Ines [Portuquese]' },
-    { value: 'Carmen', label: 'Carmen [Romanian]' },
-    { value: 'Maxim', label: 'Maxim [Russian]' },
-    { value: 'Tatyana', label: 'Tatyana [Russian]' },
-    { value: 'Enrique', label: 'Enrique [Spanish]' },
-    { value: 'Penelope', label: 'Penelope [US Spanish]' },
-    { value: 'Conchita', label: 'Conchita [Castilian Spanish]' },
-    { value: 'Astrid', label: 'Astrid [Swedish]' },
-    { value: 'Filiz', label: 'Filiz [Turkish]' },
-    { value: 'Gwyneth', label: 'Gwyneth [Welsh]' }
-  ]
+   createPost() {
+    this.$refs.postForm.validate((valid: boolean) => {
+      if (!valid) return false
 
-  createPost() {
-    const ref = this.$refs.postForm
-
-    ref.validate((valid: boolean) => {
-      if (valid) {
-        console.log(this.form)
-        this.makeRequest()
-      } else {
-       
-        return false
-      }
+      this.$store.dispatch('createPost', this.form)
     })
-  }
-
-  makeRequest() {
-      let res = Axios.post('https://qzsm779i45.execute-api.us-east-1.amazonaws.com/prod', this.form)
-    
-      console.log(res)
   }
 }
 </script>
