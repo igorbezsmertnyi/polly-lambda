@@ -1,0 +1,17 @@
+image: node:9.2.1
+
+variables:
+  NODE_ENV: production
+  BASE_URL: /polly-lambda/
+
+pages:
+  stage: deploy
+  script:
+    - yarn global add @vue/cli
+    - yarn
+    - yarn build
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
