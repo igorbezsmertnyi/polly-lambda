@@ -21,4 +21,9 @@ body
   color #333
   font-size 20px
   font-weight 400
+
+.h2
+  color #333
+  font-size 18px
+  font-weight 400
 </style>
